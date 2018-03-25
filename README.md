@@ -79,5 +79,48 @@ If you already have an existing project on github you can clone it to Colab (her
 !git clone https://github.com/wxs/keras-mnist-tutorial.git 
 ```
 
+# Installing <a href='https://github.com/Kaggle/kaggle-api'> Kaggle API </a> in Colab 
+
+Spoiler: `pip install kaggle` is not enough, though you have to start with it
+
+## Install the API
+
+```!pip install kaggle```
+
+## Get API credentials and put it to `.kaggle` folder
+
+1) Sign-up or sign-in to the kaggle account at https://www.kaggle.com. 
+2) Go to 'Account' and click on 'Create API Token' to download `kaggle.json` with credentials 
+3) Drag and drop it to your google drive and run the following script:
+
+```
+import io, os
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseDownload
+
+auth.authenticate_user()
+
+drive_service = build('drive', 'v3')
+results = drive_service.files().list(
+        q="name = 'kaggle.json'", fields="files(id)").execute()
+kaggle_api_key = results.get('files', [])
+
+filename = "/content/.kaggle/kaggle.json"
+os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+request = drive_service.files().get_media(fileId=kaggle_api_key[0]['id'])
+fh = io.FileIO(filename, 'wb')
+downloader = MediaIoBaseDownload(fh, request)
+done = False
+while done is False:
+    status, done = downloader.next_chunk()
+    print("Download %d%%." % int(status.progress() * 100))
+os.chmod(filename, 600)
+```
+## Use the API to e.g. download a dataset
+
+```!kaggle competitions download -c [name-of-the-competition]```
+
+In this case datasets won't appear in your google drive, they will only be on the VM (and removed after 12 hours) in `.kaggle/competitions/[name-of-the-competition]` folder. One can specify folder on the mounted `drive` to still have it after 12 hours. 
 
 To be continued...

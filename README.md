@@ -21,7 +21,7 @@ nothing to do with neither your local files nor google drive where notebook is b
 Moreover, google drive does not have the hierarchical structure of folders by default. From https://developers.google.com/drive/v3/web/about-files :
 
 > Each file is identified by a unique opaque ID. File IDs are stable throughout the life of the file, even if the file name changes.
-
+>
 > Files in Drive can not be directly addressed by their path. Search expressions are used to locate files by name, type, content, parent container, owner, or other metadata.
 
 If you want to have old-fashioned way of working with folders on the drive (e.g. to access data or to save models/submission), 

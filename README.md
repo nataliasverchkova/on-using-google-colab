@@ -79,6 +79,16 @@ If you already have an existing project on github you can clone it to Colab (her
 !git clone https://github.com/wxs/keras-mnist-tutorial.git 
 ```
 
+# Import modules
+1) The installed packages can be imported as usual with `import pandas as pd`
+2) If you need to load some helper script (`*.py` file that has a bunch of uuseful functions for the project), it can be done with the following snippet:
+```import imp 
+helper = imp.new_module('helper')
+exec(open("drive/path/to/helper.py").read(), helper.__dict__)
+``` 
+
+You can replace `helper` name with any other, but keep it consistent.
+
 # Installing <a href='https://github.com/Kaggle/kaggle-api'> Kaggle API </a> in Colab 
 
 Spoiler: `pip install kaggle` is not enough, though you have to start with it

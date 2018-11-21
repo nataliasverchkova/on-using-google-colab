@@ -82,7 +82,8 @@ If you already have an existing project on github you can clone it to Colab (her
 # Import modules
 1) The installed packages can be imported as usual with `import pandas as pd`
 2) If you need to load some helper script (`*.py` file that has a bunch of uuseful functions for the project), it can be done with the following snippet:
-```import imp 
+```
+import imp 
 helper = imp.new_module('helper')
 exec(open("drive/path/to/helper.py").read(), helper.__dict__)
 ``` 

@@ -28,32 +28,11 @@ If you want to have old-fashioned way of working with folders on the drive (e.g.
 do the following routine each time you start a notebook on google colab (taken from https://www.kaggle.com/getting-started/47096#273889): 
 
 ```
-# Install a Drive FUSE wrapper.
-# https://github.com/astrada/google-drive-ocamlfuse
-!apt-get install -y -qq software-properties-common python-software-properties module-init-tools
-!add-apt-repository -y ppa:alessandro-strada/ppa 2>&1 > /dev/null
-!apt-get update -qq 2>&1 > /dev/null
-!apt-get -y install -qq google-drive-ocamlfuse fuse
-
-# Generate auth tokens for Colab
-from google.colab import auth
-auth.authenticate_user()
-
-
-# Generate credentialss for the Drive FUSE library.
-from oauth2client.client import GoogleCredentials
-creds = GoogleCredentials.get_application_default()
-import getpass
-!google-drive-ocamlfuse -headless -id={creds.client_id} -secret={creds.client_secret} < /dev/null 2>&1 | grep URL
-vcode = getpass.getpass()
-!echo {vcode} | google-drive-ocamlfuse -headless -id={creds.client_id} -secret={creds.client_secret}
-
-# Create a directory and mount Google Drive using that directory.
-!mkdir -p drive
-!google-drive-ocamlfuse drive
+from google.colab import drive
+drive.mount("/content/drive")
 
 print('Files in Drive:')
-!ls drive/
+!ls /content/drive/'My Drive'
 ```
 Newly created drive folder is now lying besides other folders that you might create during this session on this virtual machine. After 12 hours it will all ~become a pumpkin~ be deleted. 
 

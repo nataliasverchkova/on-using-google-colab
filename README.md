@@ -65,9 +65,19 @@ If you already have an existing project on github you can clone it to Colab (her
 import imp 
 helper = imp.new_module('helper')
 exec(open("drive/path/to/helper.py").read(), helper.__dict__)
+
+fc_model = imp.new_module('fc_model')
+exec(open("pytorch-challenge/deep-learning-v2-pytorch/intro-to-pytorch/fc_model.py").read(), fc_model.__dict__)
+``` 
+You can replace `helper` name with any other, but keep it consistent.
+
+# Downloading and unzipping data [pytorch-challenge] 
+```
+!wget https://s3.amazonaws.com/content.udacity-data.com/nd089/Cat_Dog_data.zip 
+!unzip Cat_Dog_data.zip
 ``` 
 
-You can replace `helper` name with any other, but keep it consistent.
+***
 
 # Installing <a href='https://github.com/Kaggle/kaggle-api'> Kaggle API </a> in Colab 
 
